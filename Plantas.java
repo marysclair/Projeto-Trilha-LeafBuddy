@@ -1,39 +1,47 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Plantas{
-    Scanner inserir = new Scanner(System.in);
-    String nome;
-    String classificacao;
-    String descricao;
-    String luz;
-    String umidade;
-    String cor;
-    double tamanho;
-    void insereNome(){
-        nome = inserir.next();
+public class Plantas {
+    private ArrayList<Planta> plantas = new ArrayList<>();
+
+    public ArrayList<Planta> getPlantas() {
+        return plantas;
     }
-    void insereClassificacao(){
-        classificacao = inserir.next();
-        // return classificacao;
+
+    public void adicionarPlanta(Categoria categoria){
+        Planta planta = new Planta();
+        try (Scanner inserir = new Scanner(System.in)) {
+            System.out.println("-Insira nome: ");
+            String nome = inserir.nextLine();
+            inserir.nextLine();
+            System.out.println("-Insira idade: ");
+            int idade = inserir.nextInt();
+            inserir.nextLine();
+            planta.setNomePopular(nome);
+            planta.setIdade(idade);
+            planta.adicionarCuidado(null);
+            categoria.adicionarPlanta(planta);
+            planta.setCategoria(categoria);
+            this.plantas.add(planta);
+        }
     }
-    void insereDescricao(){
-        descricao = inserir.nextLine();
-        // return descricao;
+
+
+    public void listarInformacoesGerais(){
+        for (Planta planta : plantas) {
+            System.out.println("----------------------------------");
+            planta.mostrarInformacoes();
+            System.out.println("----------------------------------");
+        }
     }
-    String insereLuz(){
-        luz = inserir.next();
-        return luz;
+
+    public void listarInformacoesCuidados(){
+        for (Planta planta : plantas) {
+            System.out.println("----------------------------------");
+            System.out.println("-Nome: " + planta.getNomePopular());
+            planta.mostrarCuidados();
+            System.out.println("----------------------------------");
+        }
     }
-    String insereUmidade(){
-        umidade = inserir.next();
-        return umidade;
-    }
-    String insereCor(){
-        cor = inserir.next();
-        return cor;
-    }
-    double insereTamanho(){
-        tamanho = inserir.nextDouble();
-        return tamanho;
-    }
+
 }
