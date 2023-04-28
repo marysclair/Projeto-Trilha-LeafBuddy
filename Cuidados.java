@@ -1,23 +1,23 @@
 import java.io.File;
-import java.time.LocalDate;
+// import java.time.LocalDate;
 
 public class Cuidados {
-    private LocalDate dataUltimaRega;
-    private LocalDate dataUltimaAdubacao;
+    private String dataUltimaRega;
+    private String dataUltimaAdubacao;
     private String descricao;
     private File foto;
     
-    public LocalDate getDataUltimaRega() {
+    public String getDataUltimaRega() {
         return dataUltimaRega;
     }
-    public void setDataUltimaRega(LocalDate dataUltimaRega) {
+    public void setDataUltimaRega(String dataUltimaRega) {
         this.dataUltimaRega = dataUltimaRega;
     }
     
-    public LocalDate getDataUltimaAdubacao() {
+    public String getDataUltimaAdubacao() {
         return dataUltimaAdubacao;
     }
-    public void setDataUltimaAdubacao(LocalDate dataUltimaAdubacao) {
+    public void setDataUltimaAdubacao(String dataUltimaAdubacao) {
         this.dataUltimaAdubacao = dataUltimaAdubacao;
     }
     
@@ -37,7 +37,7 @@ public class Cuidados {
     
     void listarCuidados(){
         System.out.println("-Data da última adubação: " + this.dataUltimaAdubacao);
-        System.out.println("-Data da última rega: " + this.dataUltimaAdubacao);
-        System.out.println("-Descrição: " + this.dataUltimaAdubacao);
+        System.out.println("-Data da última rega: " + this.dataUltimaRega);
+        System.out.println("-Descrição: " + this.descricao);
     }
 }

@@ -48,18 +48,26 @@ public class Planta{
     }
 
     public void mostrarInformacoes(){
+        System.out.println("-ID: " + this.id);
         System.out.println("-Nome: " + this.nomePopular);
         System.out.println("-Idade: " + this.idade);
         System.out.println("-Categoria: " + this.categoria.getNome());
     }
 
     public void mostrarCuidados(){
-        for(Cuidados cuidado: historicoDeCuidados){
-            cuidado.listarCuidados();
+        if(historicoDeCuidados.isEmpty())
+            System.out.println("Não possui registros de cuidados ainda. ");
+        else{
+            for(Cuidados cuidado: historicoDeCuidados){
+                cuidado.listarCuidados();
+            }
         }
     }
 
     public void mostrarUltimoCuidado(){
-        historicoDeCuidados.get(historicoDeCuidados.size()-1).listarCuidados();
+        if(historicoDeCuidados.isEmpty()) 
+            System.out.println("Não possui registros de cuidados ainda. ");
+        else
+            historicoDeCuidados.get(historicoDeCuidados.size()-1).listarCuidados();
     }
 }

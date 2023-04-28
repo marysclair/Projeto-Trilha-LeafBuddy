@@ -1,60 +1,112 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args){
+        int opcao;
+        Plantas plantas = new Plantas();
+        Categorias categorias = new Categorias();
+        Interacao interacao = new Interacao();
         Scanner inserir = new Scanner(System.in);
-            int opcao;
-            Plantas plantas = new Plantas();
-
-            Categoria[] categorias = new Categoria[10];
-            for(int i=0; i<10; i++){
-                categorias[i] = new Categoria();
-                switch(i){
-                    case 0:
-                        categorias[i].setNome("cacto");
-                        categorias[i].setSoloIdeal("poroso");
-                        categorias[i].setUmidadeSoloIdeal("quase seco");
-                        categorias[i].setLuminosidadeIdeal("muito sol");
-                        break;
-                    case 1:
-                        categorias[i].setNome("suculenta");
-                        categorias[i].setSoloIdeal("poroso");
-                        categorias[i].setUmidadeSoloIdeal("quase seco");
-                        categorias[i].setLuminosidadeIdeal("muito sol");
-                        break;
-                }
-            }
-
             do{
                 System.out.println("-----------------CATALOGO DE PLANTAS-------------------");
                 System.out.println("-[1] Cadastrar uma nova planta");
-                // System.out.println("-[2] Procurar uma planta cadastrada no sistema");
-                // System.out.println("-[3] Excluir uma planta cadastrada no sistema");
-                System.out.println("-[4] Listar todas as plantas cadastradas no sistema");
+                System.out.println("-[2] Filtrar por Categoria/Nome Popular");
+                System.out.println("-[3] Remover uma planta cadastrada");
+                System.out.println("-[4] Listar informações das plantas cadastradas");
+                System.out.println("-[5] Histórico de cuidados");
                 System.out.println("-[0] opcao do sistema");
                 System.out.println("-------Informe a opcao desejada: ");
                 opcao = inserir.nextInt();
-                inserir.nextLine();
 
                 if(opcao==1){
-                    System.out.println("-ESSE SISTEMA CATALOGA PLANTAS DAS SEGUINTES CATEGORIAS: ");
-                    System.out.println("1- Cacto");
-                    System.out.println("2- Suculentas");
-                    System.out.println("3- Arbustos");
-                    System.out.println("4- Flores tropicais");
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("Você escolheu cadastrar uma nova planta no sistema.");
+                    System.out.println();
+                    System.out.println("-Esse sistema cataloga as plantas das seguintes categorias: ");
+                    categorias.imprimirCategorias();
                     System.out.println("-Qual categoria de planta você gostaria de cadastrar? ");
                     int categoria = inserir.nextInt();
-                    inserir.nextLine();
-                    switch(categoria){
+                    plantas.adicionarPlanta(categoria, categorias);
+                }
+                else if(opcao==2){
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("Você escolheu filtrar as plantas por Categoria/Nome Popular.");
+                    System.out.println();
+                    System.out.println("-De qual forma você gostaria de filtrar? ");
+                    System.out.println("[1]- Categoria");
+                    System.out.println("[2]- Nome Popular");
+                    opcao = inserir.nextInt();
+                    Busca buscar = new Busca();
+                    System.out.println("Informe: ");
+                    String nome = inserir.nextLine();
+                    buscar.setCriterio(nome);
+                    ArrayList<Planta> resultadoDaBusca = new ArrayList<>();
+                    switch (opcao) {
                         case 1:
-                            plantas.adicionarPlanta(categorias[categoria-1]);
+                            resultadoDaBusca = buscar.buscarPorCategoria(plantas); 
+                            for (Planta planta : resultadoDaBusca) {
+                                planta.mostrarInformacoes();
+                            }
+                            break;
+                        case 2:
+                            resultadoDaBusca = buscar.buscarPorNomePopular(plantas);
+                            for (Planta planta : resultadoDaBusca) {
+                                planta.mostrarInformacoes();
+                            }
+                            break;
+                        default:
                             break;
                     }
-                    System.out.println("--Planta cadastrada");
                 }
                 else if(opcao==4){
-                    plantas.listarInformacoesGerais();
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("Você escolheu listar informações das plantas cadastradas.");
+                    System.out.println();
+                    if(plantas.taVazia())
+                        System.out.println("Não existe plantas cadastradas ainda no sistema.");
+                    else
+                        plantas.listarInformacoesGerais();
+                    System.out.println("");
                 }
+                else if(opcao==5){
+                    System.out.println("-----------------------------------------------------");
+                    System.out.println("Você escolheu histórico de cuidados.");
+                    System.out.println();
+                    System.out.println("[1]- Listar as informações de cuidados mais recentes de todas as plantas");
+                    System.out.println("[2]- Listar as informações de cuidados de todas as plantas");
+                    System.out.println("[3]- Acrescentar um novo registro de cuidados a uma planta");
+                    opcao = inserir.nextInt();
+                    switch (opcao) {
+                        case 1:
+                            plantas.listarInformacoesCuidadosRecente();
+                            break;
+                        case 2:
+                            plantas.listarInformacoesCuidados();
+                            break;
+                        case 3:
+                            Busca buscar = new Busca();
+                            System.out.println("Para adicionar um novo registro de cuidados, vamos ter que buscar a planta específica para isso.");
+                            System.out.println("Para isso, é necessário saber o ID da planta. ");
+                            int id = inserir.nextInt();
+                            Planta resultadoBusca = buscar.buscarPorID(plantas, id);
+                            if(resultadoBusca==null) System.out.println("ID INVÁLIDO");
+                            else {
+                                Cuidados cuidados = interacao.lerCuidados();
+                                resultadoBusca.mostrarInformacoes();
+                                resultadoBusca.adicionarCuidado(cuidados);
+                                resultadoBusca.mostrarUltimoCuidado();
+                            }
+                            break;
+                        default:
+                            System.out.println("Opção inválida!");
+                            break;
+                    }
+                }
+                else if(opcao==0){
+                    System.out.println("PROGRAMA ENCERRADO.");
+                }
+                System.out.println();
             }while(opcao!=0);
     }
 }

@@ -4,7 +4,6 @@ public class Categoria {
     private String nome;
     private String luminosidadeIdeal;
     private String soloIdeal;
-    private String umidadeSoloIdeal;
     private String climaIdeal;
     private ArrayList<Planta> plantas = new ArrayList<>();
     
@@ -29,13 +28,6 @@ public class Categoria {
         this.soloIdeal = soloIdeal;
     }
     
-    public String getUmidadeSoloIdeal() {
-        return umidadeSoloIdeal;
-    }
-    public void setUmidadeSoloIdeal(String umidadeSoloIdeal) {
-        this.umidadeSoloIdeal = umidadeSoloIdeal;
-    }
-    
     public String getClimaIdeal() {
         return climaIdeal;
     }
@@ -53,12 +45,10 @@ public class Categoria {
         this.plantas.remove(planta);
     }
 
-
     public void listarInformacoes(){
         System.out.println("-Nome: " + this.nome);
         System.out.println("-Solo ideal: " + this.soloIdeal);
         System.out.println("-Luminosidade ideal: " + this.luminosidadeIdeal);
-        System.out.println("-Umidade de solo ideal: " + this.umidadeSoloIdeal);
         System.out.println("-Clima ideal: " + this.climaIdeal);
     }
     
