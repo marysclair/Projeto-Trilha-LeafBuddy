@@ -1,11 +1,12 @@
-import java.util.ArrayList;
+import java.io.Serializable;
+// import java.util.ArrayList;
 
-public class Categoria {
+public class Categoria implements Serializable{
     private String nome;
     private String luminosidadeIdeal;
     private String soloIdeal;
     private String climaIdeal;
-    private ArrayList<Planta> plantas = new ArrayList<>();
+    private int diasRega;
     
     public String getNome() {
         return nome;
@@ -35,21 +36,29 @@ public class Categoria {
         this.climaIdeal = climaIdeal;
     }
 
-    public ArrayList<Planta> getPlantas() {
-        return plantas;
+    public int getDiasRega() {
+        return diasRega;
     }
-    public void adicionarPlanta(Planta planta) {
-        this.plantas.add(planta);
+    public void setDiasRega(int diasRega) {
+        this.diasRega = diasRega;
     }
-    public void removerPlanta(Planta planta){
-        this.plantas.remove(planta);
-    }
+
+    // public ArrayList<Planta> getPlantas() {
+    //     return plantas;
+    // }
+    // public void adicionarPlanta(Planta planta) {
+    //     this.plantas.add(planta);
+    // }
+    // public void removerPlanta(Planta planta){
+    //     this.plantas.remove(planta);
+    // }
 
     public void listarInformacoes(){
         System.out.println("-Nome: " + this.nome);
         System.out.println("-Solo ideal: " + this.soloIdeal);
         System.out.println("-Luminosidade ideal: " + this.luminosidadeIdeal);
         System.out.println("-Clima ideal: " + this.climaIdeal);
+        System.out.println("-Frequência da rega: " + this.diasRega);
     }
     
 }

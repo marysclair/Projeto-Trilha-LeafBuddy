@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 public class Busca {
     private String criterio;
@@ -11,21 +11,21 @@ public class Busca {
         this.criterio = criterio;
     }
 
-    public ArrayList<Planta> buscarPorNomePopular(Plantas plantas){
-        ArrayList<Planta> resultadoDaBusca = new ArrayList<>();
+    public Plantas buscarPorNomePopular(Plantas plantas){
+        Plantas resultadoDaBusca = new Plantas();
         for (Planta planta : plantas.getPlantas()) {
             if (planta.getNomePopular().equals(this.criterio)) {
-                resultadoDaBusca.add(planta);
+                resultadoDaBusca.adicionarPlanta(planta);
             }
         }
         return resultadoDaBusca;
     }
     
-    public ArrayList<Planta> buscarPorCategoria(Plantas plantas){
-        ArrayList<Planta> resultadoDaBusca = new ArrayList<>();
+    public Plantas buscarPorCategoria(Plantas plantas){
+        Plantas resultadoDaBusca = new Plantas();
         for (Planta planta : plantas.getPlantas()) {
-            if (planta.getCategoria().getNome().equals(this.criterio)) {
-                resultadoDaBusca.add(planta);
+            if (planta.getCategoria().getNome().equals(criterio.toUpperCase())) {
+                resultadoDaBusca.adicionarPlanta(planta);
             }
         }
         return resultadoDaBusca;

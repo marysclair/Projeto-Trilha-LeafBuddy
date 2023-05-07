@@ -1,82 +1,93 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
     public static void main(String[] args){
+        System.setProperty("file.encoding", "UTF-8");
         int opcao;
-        Plantas plantas = new Plantas();
-        Categorias categorias = new Categorias();
+        String nome;
+        Serializar serializar = new Serializar();
+        Plantas plantas = serializar.lerPlantasDeArquivoBinario();
         Interacao interacao = new Interacao();
         Scanner inserir = new Scanner(System.in);
             do{
-                System.out.println("-----------------CATALOGO DE PLANTAS-------------------");
-                System.out.println("-[1] Cadastrar uma nova planta");
-                System.out.println("-[2] Filtrar por Categoria/Nome Popular");
-                System.out.println("-[3] Remover uma planta cadastrada");
-                System.out.println("-[4] Listar informações das plantas cadastradas");
-                System.out.println("-[5] Histórico de cuidados");
-                System.out.println("-[0] opcao do sistema");
-                System.out.println("-------Informe a opcao desejada: ");
-                opcao = inserir.nextInt();
+                opcao = interacao.menu();
 
                 if(opcao==1){
-                    System.out.println("-----------------------------------------------------");
-                    System.out.println("Você escolheu cadastrar uma nova planta no sistema.");
+                    Planta planta = plantas.criarPlanta();
+                    plantas.adicionarPlanta(planta);
+                    serializar.salvarArquivoSerializado(plantas);
+                    System.out.println("Planta cadastrada com sucesso! :)");
                     System.out.println();
-                    System.out.println("-Esse sistema cataloga as plantas das seguintes categorias: ");
-                    categorias.imprimirCategorias();
-                    System.out.println("-Qual categoria de planta você gostaria de cadastrar? ");
-                    int categoria = inserir.nextInt();
-                    plantas.adicionarPlanta(categoria, categorias);
                 }
                 else if(opcao==2){
-                    System.out.println("-----------------------------------------------------");
+                    System.out.println();
+                    System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu filtrar as plantas por Categoria/Nome Popular.");
                     System.out.println();
                     System.out.println("-De qual forma você gostaria de filtrar? ");
                     System.out.println("[1]- Categoria");
                     System.out.println("[2]- Nome Popular");
+                    System.out.println("-Informe a opção desejada: ");
                     opcao = inserir.nextInt();
+                    System.out.println();
+                    System.out.println("Informe o filtro: ");
+                    inserir.nextLine();
+                    nome = inserir.nextLine();
                     Busca buscar = new Busca();
-                    System.out.println("Informe: ");
-                    String nome = inserir.nextLine();
                     buscar.setCriterio(nome);
-                    ArrayList<Planta> resultadoDaBusca = new ArrayList<>();
+                    Plantas resultadoDaBusca = new Plantas();
                     switch (opcao) {
                         case 1:
                             resultadoDaBusca = buscar.buscarPorCategoria(plantas); 
-                            for (Planta planta : resultadoDaBusca) {
-                                planta.mostrarInformacoes();
-                            }
+                            if(resultadoDaBusca.taVazia())      System.out.println("Categoria inválida");
+                            else    resultadoDaBusca.listarInformacoesGerais();
                             break;
                         case 2:
                             resultadoDaBusca = buscar.buscarPorNomePopular(plantas);
-                            for (Planta planta : resultadoDaBusca) {
-                                planta.mostrarInformacoes();
-                            }
+                            if(resultadoDaBusca.taVazia())      System.out.println("Nome popular inválido");
+                            else    resultadoDaBusca.listarInformacoesGerais();
                             break;
                         default:
+                            System.out.println("Opção inválida");
                             break;
                     }
                 }
+                else if(opcao==3){
+                    System.out.println();
+                    System.out.println("------------------------------------------------------------");
+                    System.out.println("Você escolheu remover uma planta do sistema.");
+                    System.out.println();
+                    Busca buscar = new Busca();
+                            System.out.println("Para remover uma planta do sistema, vamos ter que buscar a planta específica para isso.");
+                            System.out.println("Para isso, é necessário saber o ID da planta. ");
+                            System.out.println("-Informe a opção desejada: ");
+                            int id = inserir.nextInt();
+                            Planta resultadoBusca = buscar.buscarPorID(plantas, id);
+                            System.out.println();
+                            if(resultadoBusca==null) System.out.println("----ID inválido----");
+                            else {
+                                plantas.removerPlanta(resultadoBusca);
+                                System.out.println("Planta removida com sucesso! :)");
+                                serializar.salvarArquivoSerializado(plantas);
+                                System.out.println();
+                                System.out.println("P.S.: Espero que ela não tenha morrido...");
+                            }
+                            
+                }
                 else if(opcao==4){
-                    System.out.println("-----------------------------------------------------");
+                    System.out.println();
+                    System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu listar informações das plantas cadastradas.");
                     System.out.println();
-                    if(plantas.taVazia())
-                        System.out.println("Não existe plantas cadastradas ainda no sistema.");
-                    else
-                        plantas.listarInformacoesGerais();
+                    plantas.listarInformacoesGerais();
                     System.out.println("");
                 }
                 else if(opcao==5){
-                    System.out.println("-----------------------------------------------------");
+                    System.out.println();
+                    System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu histórico de cuidados.");
                     System.out.println();
-                    System.out.println("[1]- Listar as informações de cuidados mais recentes de todas as plantas");
-                    System.out.println("[2]- Listar as informações de cuidados de todas as plantas");
-                    System.out.println("[3]- Acrescentar um novo registro de cuidados a uma planta");
-                    opcao = inserir.nextInt();
+                    opcao = interacao.interfaceCuidados();
                     switch (opcao) {
                         case 1:
                             plantas.listarInformacoesCuidadosRecente();
@@ -85,26 +96,56 @@ public class Main {
                             plantas.listarInformacoesCuidados();
                             break;
                         case 3:
+                            System.out.println();
                             Busca buscar = new Busca();
                             System.out.println("Para adicionar um novo registro de cuidados, vamos ter que buscar a planta específica para isso.");
                             System.out.println("Para isso, é necessário saber o ID da planta. ");
+                            System.out.println("-Informe a opção desejada: ");
                             int id = inserir.nextInt();
                             Planta resultadoBusca = buscar.buscarPorID(plantas, id);
-                            if(resultadoBusca==null) System.out.println("ID INVÁLIDO");
+                            System.out.println();
+                            if(resultadoBusca==null) System.out.println("---ID inválido---");
                             else {
                                 Cuidados cuidados = interacao.lerCuidados();
-                                resultadoBusca.mostrarInformacoes();
                                 resultadoBusca.adicionarCuidado(cuidados);
+                                System.out.println("Prontinho! Confira se os dados estão corretos:");
+                                System.out.println("------------------------------------------------------------");
                                 resultadoBusca.mostrarUltimoCuidado();
+                                System.out.println("------------------------------------------------------------");
+                                serializar.salvarArquivoSerializado(plantas);
                             }
                             break;
                         default:
+                            System.out.println();
                             System.out.println("Opção inválida!");
                             break;
                     }
                 }
+                else if(opcao==6){
+                    System.out.println();
+                    System.out.println("------------------------------------------------------------");
+                    System.out.println("Você escolheu lista personalizada de plantas.");
+                    System.out.println();
+                    opcao = interacao.interfaceFavoritas();
+                    switch(opcao){
+                        case 1:
+                            plantas.listarPlantasFavoritas();
+                            break;
+                        case 3:
+                            System.out.println("Para isso, é necessário saber o ID da planta. ");
+                            System.out.println("-Informe a opção desejada: ");
+                            Busca buscar = new Busca();
+                            int id = inserir.nextInt();
+                            Planta resultadoBusca = buscar.buscarPorID(plantas, id);
+                            resultadoBusca.setFavorita(true);
+                            serializar.salvarArquivoSerializado(plantas);
+                            break;
+                    }
+                }
                 else if(opcao==0){
-                    System.out.println("PROGRAMA ENCERRADO.");
+                    System.out.println();
+                    System.out.println("------------------------------------------------------------");
+                    System.out.println("PROGRAMA ENCERRADO");
                 }
                 System.out.println();
             }while(opcao!=0);

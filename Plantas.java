@@ -1,8 +1,11 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 // import java.util.Scanner;
 
-public class Plantas {
+public class Plantas implements Serializable{
     private ArrayList<Planta> plantas = new ArrayList<>();
+    private static final long serialVersionUID = 2880921618237199882L;
+
 
     public ArrayList<Planta> getPlantas() {
         return plantas;
@@ -15,58 +18,102 @@ public class Plantas {
             return false;
     }
 
-    public void adicionarPlanta(int valor, Categorias categorias){
+    public Planta criarPlanta(){
+        Categorias categorias = new Categorias();
         Planta planta = new Planta();
         Interacao interacao = new Interacao();
+        int valor = interacao.interfaceCategoria(categorias);
         Categoria categoria = categorias.preencherCategoria(valor);
-        interacao.lerDados(planta);
-        planta.setCategoria(categoria);
-        System.out.println();
-        System.out.println("Prontinho! Confira se os dados estão corretos:");
-        System.out.println("-----------------------------------------------");
-        planta.mostrarInformacoes();
-        System.out.println("-----------------------------------------------");
-        System.out.println();
-        System.out.println("-------------------CATEGORIA-------------------");
-        planta.getCategoria().listarInformacoes();
-        System.out.println("-----------------------------------------------");
-        System.out.println();
+        if(categoria!=null){
+            interacao.lerPlanta(planta);
+            planta.setCategoria(categoria);
+            System.out.println();
+            System.out.println("Prontinho! Confira se os dados estão corretos:");
+            System.out.println("------------------------------------------------------------");
+            planta.mostrarInformacoes();
+            System.out.println("------------------------------------------------------------");
+            System.out.println();
+            System.out.println("--------------------------CATEGORIA-------------------------");
+            planta.getCategoria().listarInformacoes();
+            System.out.println("------------------------------------------------------------");
+            System.out.println();
+        }
+        return planta;
+    }
+
+    public void adicionarPlanta(Planta planta){
         this.plantas.add(planta);
-        System.out.println("Planta cadastrada com sucesso! :)");
-        System.out.println();
+    }
+
+    public void removerPlanta(Planta planta){
+        if (planta==null) {
+            System.out.println();
+            System.out.println("---Id inválido---");
+            System.out.println();
+        }
+        else this.plantas.remove(planta);
     }
 
 
     public void listarInformacoesGerais(){
-        System.out.println();
-        for (Planta planta : plantas) {
-            System.out.println("----------------------------------");
-            planta.mostrarInformacoes();
-            System.out.println("----------------------------------");
+        if(taVazia())
+            System.out.println("Não existe plantas cadastradas ainda no sistema.");
+        else{
+            System.out.println();
+            for (Planta planta : plantas) {
+                System.out.println("------------------------------------------------------------");
+                planta.mostrarInformacoes();
+                System.out.println("------------------------------------------------------------");
+            }
         }
         System.out.println();
     }
 
     public void listarInformacoesCuidadosRecente(){
-        System.out.println();
-        for (Planta planta : plantas) {
-            System.out.println("----------------------------------");
-            System.out.println("-Nome: " + planta.getNomePopular());
-            planta.mostrarUltimoCuidado();
-            System.out.println("----------------------------------");
+        if(taVazia())
+            System.out.println("Não existe plantas cadastradas ainda no sistema.");
+        else{
+            System.out.println();
+            for (Planta planta : plantas) {
+                System.out.println("------------------------------------------------------------");
+                System.out.println("-Nome: " + planta.getNomePopular());
+                planta.mostrarUltimoCuidado();
+                System.out.println("------------------------------------------------------------");
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 
     public void listarInformacoesCuidados(){
-        System.out.println();
-        for (Planta planta : plantas) {
-            System.out.println("----------------------------------");
-            System.out.println("-Nome: " + planta.getNomePopular());
-            planta.mostrarCuidados();
-            System.out.println("----------------------------------");
+        if(taVazia())
+            System.out.println("Não existe plantas cadastradas ainda no sistema.");
+        else{
+            System.out.println();
+            for (Planta planta : plantas) {
+                System.out.println("------------------------------------------------------------");
+                System.out.println("-Nome: " + planta.getNomePopular());
+                System.out.println();
+                planta.mostrarCuidados();
+                System.out.println("------------------------------------------------------------");
+            }
+            System.out.println();
         }
-        System.out.println();
     }
 
+    public void listarPlantasFavoritas(){
+        boolean vazia = false;
+        System.out.println();
+            for (Planta planta : plantas) {
+                if(planta.isFavorita()==true){
+                    vazia = true;
+                    System.out.println("------------------------------------------------------------");
+                    planta.mostrarInformacoes();
+                    System.out.println("------------------------------------------------------------");
+                }
+            }
+            System.out.println();
+        if(vazia==false){
+            System.out.println("Não existe plantas favoritas ainda no sistema.");
+        }
+    }
 }

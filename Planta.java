@@ -1,12 +1,12 @@
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class Planta{
-    Scanner inserir = new Scanner(System.in);
+public class Planta implements Serializable{
     private int id;
     private String nomePopular;
     private int idade;
     private Categoria categoria;
+    private boolean favorita;
     private ArrayList<Cuidados> historicoDeCuidados = new ArrayList<>();
     
     public int getId() {
@@ -15,7 +15,7 @@ public class Planta{
     public void setId(int id) {
         this.id = id;
     }
-
+    
     public String getNomePopular() {
         return nomePopular;
     }
@@ -37,6 +37,13 @@ public class Planta{
         this.categoria = categoria;
     }
     
+    public boolean isFavorita() {
+        return favorita;
+    }
+    public void setFavorita(boolean favorita) {
+        this.favorita = favorita;
+    }
+
     public ArrayList<Cuidados> getHistoricoDeCuidados() {
         return historicoDeCuidados;
     }
@@ -56,18 +63,23 @@ public class Planta{
 
     public void mostrarCuidados(){
         if(historicoDeCuidados.isEmpty())
-            System.out.println("Não possui registros de cuidados ainda. ");
+        System.out.println("Não possui registros de cuidados ainda. ");
         else{
             for(Cuidados cuidado: historicoDeCuidados){
                 cuidado.listarCuidados();
             }
+            FrequenciaRega frequenciaRega = new FrequenciaRega();
+            frequenciaRega.eParaRegar(categoria, historicoDeCuidados);
         }
     }
 
     public void mostrarUltimoCuidado(){
         if(historicoDeCuidados.isEmpty()) 
-            System.out.println("Não possui registros de cuidados ainda. ");
-        else
+        System.out.println("Não possui registros de cuidados ainda. ");
+        else{
             historicoDeCuidados.get(historicoDeCuidados.size()-1).listarCuidados();
+            FrequenciaRega frequenciaRega = new FrequenciaRega();
+            frequenciaRega.eParaRegar(categoria, historicoDeCuidados);
+        }
     }
 }
