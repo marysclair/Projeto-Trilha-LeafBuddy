@@ -6,15 +6,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-public class Serializar {
+public class Serializa {
     public boolean criarArquivo(){
         File arquivo = new File("arquivo.bin");
         try{
             if(arquivo.createNewFile()){
-                System.out.println("arquivo criado com sucesso");
                 return true;
             } else{
-                System.out.println("arquivo já existe");
                 return false;
             }
         } catch(IOException e){

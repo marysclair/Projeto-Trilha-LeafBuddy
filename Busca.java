@@ -10,18 +10,8 @@ public class Busca {
     public void setCriterio(String criterio) {
         this.criterio = criterio;
     }
-
-    public Plantas buscarPorNomePopular(Plantas plantas){
-        Plantas resultadoDaBusca = new Plantas();
-        for (Planta planta : plantas.getPlantas()) {
-            if (planta.getNomePopular().equals(this.criterio)) {
-                resultadoDaBusca.adicionarPlanta(planta);
-            }
-        }
-        return resultadoDaBusca;
-    }
     
-    public Plantas buscarPorCategoria(Plantas plantas){
+    public Plantas buscarPlantasPorCategoria(Plantas plantas){
         Plantas resultadoDaBusca = new Plantas();
         for (Planta planta : plantas.getPlantas()) {
             if (planta.getCategoria().getNome().equals(criterio.toUpperCase())) {
@@ -30,6 +20,11 @@ public class Busca {
         }
         return resultadoDaBusca;
     }
+
+    // public Categoria buscarCategoria(String categoria){
+    //     Categorias categorias = new Categorias();
+
+    // }
 
     public Planta buscarPorID(Plantas plantas, int id){
         Planta resultadoDaBusca = null;

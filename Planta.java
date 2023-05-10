@@ -7,7 +7,7 @@ public class Planta implements Serializable{
     private int idade;
     private Categoria categoria;
     private boolean favorita;
-    private ArrayList<Cuidados> historicoDeCuidados = new ArrayList<>();
+    private ArrayList<Cuidado> historicoDeCuidados = new ArrayList<>();
     
     public int getId() {
         return id;
@@ -44,14 +44,14 @@ public class Planta implements Serializable{
         this.favorita = favorita;
     }
 
-    public ArrayList<Cuidados> getHistoricoDeCuidados() {
+    public ArrayList<Cuidado> getHistoricoDeCuidados() {
         return historicoDeCuidados;
     }
-    public void adicionarCuidado(Cuidados cuidados) {
-        this.historicoDeCuidados.add(cuidados);
+    public void adicionarCuidado(Cuidado cuidado) {
+        this.historicoDeCuidados.add(cuidado);
     }
-    public void removerCuidado(Cuidados cuidados) {
-        this.historicoDeCuidados.remove(cuidados);
+    public void removerCuidado(Cuidado cuidado) {
+        this.historicoDeCuidados.remove(cuidado);
     }
 
     public void mostrarInformacoes(){
@@ -65,7 +65,7 @@ public class Planta implements Serializable{
         if(historicoDeCuidados.isEmpty())
         System.out.println("Não possui registros de cuidados ainda. ");
         else{
-            for(Cuidados cuidado: historicoDeCuidados){
+            for(Cuidado cuidado: historicoDeCuidados){
                 cuidado.listarCuidados();
             }
             FrequenciaRega frequenciaRega = new FrequenciaRega();

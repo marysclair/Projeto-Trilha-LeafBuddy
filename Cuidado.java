@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Cuidados implements Serializable{
+public class Cuidado implements Serializable{
     private LocalDate dataUltimaRega;
     private LocalDate dataUltimaAdubacao;
     private String descricao;
@@ -41,7 +41,7 @@ public class Cuidados implements Serializable{
         return descricao;
     }
     public void setDescricao(String descricao) {
-        if(descricao==null) this.descricao = "Usuário não preencheu";
+        if(descricao.isEmpty()) this.descricao = "Usuário não preencheu";
         else this.descricao = descricao;
     }
 

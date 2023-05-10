@@ -132,9 +132,19 @@ public class Categorias{
         return categoria;
     }
 
-    public void imprimirCategorias(){
+    public void imprimirNomeCategorias(){
         for(NomeCategorias nomeCategorias : NomeCategorias.values()){
             System.out.println("[" + nomeCategorias.getValor() + "]- " + nomeCategorias.toString());
+        }
+    }
+
+    public void imprimirCategorias(){
+        for (int i = 1; i < 10; i++) {
+            System.out.println("------------------------------------------------------------");
+            Categoria categoria = preencherCategoria(i);
+            categoria.listarInformacoes();
+            System.out.println("------------------------------------------------------------");
+            System.out.println();
         }
     }
 }

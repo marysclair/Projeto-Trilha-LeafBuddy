@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class FrequenciaRega implements Serializable{
@@ -30,17 +31,19 @@ public class FrequenciaRega implements Serializable{
         return estacao;
     }
 
-    public void eParaRegar(Categoria categoria, ArrayList<Cuidados> historicoDeCuidados){
+    public void eParaRegar(Categoria categoria, ArrayList<Cuidado> historicoDeCuidados){
         int diasRega = categoria.getDiasRega();
         LocalDate dataUltimaRega = historicoDeCuidados.get(historicoDeCuidados.size()-1).getDataUltimaRega();
+        LocalDate dataProximaRega = dataUltimaRega.plusDays(diasRega);
+        long dias = ChronoUnit.DAYS.between(dataUltimaRega, dataProximaRega);
+        System.out.println();
+        System.out.println("Faltam " + dias  + " dias para a próxima rega");
         if(dataUltimaRega.plusDays(diasRega).isBefore(LocalDate.now())||dataUltimaRega.plusDays(diasRega).isEqual(LocalDate.now())){
-            System.out.println("------------------------------------------------------------");
             System.out.println("--É dia de regar sua planta!--");
-            System.out.println("Mas se lembre que para saber se é o dia certo para regar sua");
-            System.out.println("planta, preste atenção na umidade do solo antes de tudo.");
-            System.out.println("------------------------------------------------------------");
             System.out.println();
         }
+        System.out.println("Mas se lembre que para saber se é o dia certo para regar sua");
+        System.out.println("planta, preste atenção na umidade do solo antes de tudo.");
     }
 
 }
