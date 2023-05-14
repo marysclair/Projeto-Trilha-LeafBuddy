@@ -1,5 +1,6 @@
 public class Categorias{
-    
+    private final static int QTDD = 9;
+
     enum NomeCategorias {
         CACTO(1), 
         SUCULENTA(2), 
@@ -139,7 +140,7 @@ public class Categorias{
     }
 
     public void imprimirCategorias(){
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i <= QTDD; i++) {
             System.out.println("------------------------------------------------------------");
             Categoria categoria = preencherCategoria(i);
             categoria.listarInformacoes();

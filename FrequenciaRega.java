@@ -1,7 +1,6 @@
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 
 public class FrequenciaRega implements Serializable{
     private int dias;
@@ -31,9 +30,9 @@ public class FrequenciaRega implements Serializable{
         return estacao;
     }
 
-    public void eParaRegar(Categoria categoria, ArrayList<Cuidado> historicoDeCuidados){
+    public void eParaRegar(Categoria categoria, Rega cuidado){
         int diasRega = categoria.getDiasRega();
-        LocalDate dataUltimaRega = historicoDeCuidados.get(historicoDeCuidados.size()-1).getDataUltimaRega();
+        LocalDate dataUltimaRega = cuidado.getData();
         LocalDate dataProximaRega = dataUltimaRega.plusDays(diasRega);
         long dias = ChronoUnit.DAYS.between(dataUltimaRega, dataProximaRega);
         System.out.println();

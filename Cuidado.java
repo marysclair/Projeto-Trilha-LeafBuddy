@@ -1,41 +1,31 @@
-import java.io.File;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Cuidado implements Serializable{
-    private LocalDate dataUltimaRega;
-    private LocalDate dataUltimaAdubacao;
+public abstract class Cuidado implements Serializable{
+    private LocalDate data;
     private String descricao;
-    private File foto;
     
-    public LocalDate getDataUltimaRega() {
-        return dataUltimaRega;
+    public Cuidado(String data, String descricao){
+        setData(data);
+        setDescricao(descricao);
     }
-    public void setDataUltimaRega(String dataUltimaRega) {
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(String data) {
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataUltimaReDate = LocalDate.parse(dataUltimaRega, formatter);
-            this.dataUltimaRega = dataUltimaReDate;
+            LocalDate dataUltimaReDate = LocalDate.parse(data, formatter);
+            this.data = dataUltimaReDate;
         } catch (DateTimeParseException e) {
             System.out.println("Data inválida");
           }
     }
     
-    public LocalDate getDataUltimaAdubacao() {
-        return dataUltimaAdubacao;
-    }
-
-    public void setDataUltimaAdubacao(String dataUltimaAdubacao) {
-        try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataUltimaAdDate = LocalDate.parse(dataUltimaAdubacao, formatter);
-            this.dataUltimaAdubacao = dataUltimaAdDate;
-        } catch (DateTimeParseException e) {
-            System.out.println("Data inválida");
-        }
-    }
     
     public String getDescricao() {
         return descricao;
@@ -44,17 +34,6 @@ public class Cuidado implements Serializable{
         if(descricao.isEmpty()) this.descricao = "Usuário não preencheu";
         else this.descricao = descricao;
     }
-
-    public File getFoto() {
-        return foto;
-    }
-    public void setFoto(File foto) {
-        this.foto = foto;
-    }
-    
-    void listarCuidados(){
-        System.out.println("-Data da última adubação: " + this.dataUltimaAdubacao);
-        System.out.println("-Data da última rega: " + this.dataUltimaRega);
-        System.out.println("-Descrição: " + this.descricao);
-    }
+   
+    public abstract void listarCuidados();
 }

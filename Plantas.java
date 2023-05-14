@@ -1,6 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 // import java.util.Scanner;
+import java.util.Scanner;
 
 public class Plantas implements Serializable{
     private ArrayList<Planta> plantas = new ArrayList<>();
@@ -18,14 +19,14 @@ public class Plantas implements Serializable{
             return false;
     }
 
-    public Planta criarPlanta(){
+    public Planta criarPlanta(Scanner inserir){
         Categorias categorias = new Categorias();
-        Planta planta = new Planta();
         Interacao interacao = new Interacao();
-        int valor = interacao.interfaceCategoria(categorias);
+        Planta planta = null;
+        int valor = interacao.interfaceCategoria(categorias, inserir);
         Categoria categoria = categorias.preencherCategoria(valor);
         if(categoria!=null){
-            interacao.lerPlanta(planta);
+            planta = interacao.lerPlanta(inserir);
             planta.setCategoria(categoria);
             System.out.println();
             System.out.println("Prontinho! Confira se os dados estão corretos:");

@@ -9,6 +9,12 @@ public class Planta implements Serializable{
     private boolean favorita;
     private ArrayList<Cuidado> historicoDeCuidados = new ArrayList<>();
     
+    public Planta(int id, String nomePopular, int idade){
+        setId(id);
+        setNomePopular(nomePopular);
+        setIdade(idade);
+    }
+
     public int getId() {
         return id;
     }
@@ -67,9 +73,13 @@ public class Planta implements Serializable{
         else{
             for(Cuidado cuidado: historicoDeCuidados){
                 cuidado.listarCuidados();
+                System.out.println();
             }
-            FrequenciaRega frequenciaRega = new FrequenciaRega();
-            frequenciaRega.eParaRegar(categoria, historicoDeCuidados);
+            if (historicoDeCuidados.get(historicoDeCuidados.size()-1) instanceof Rega) {
+                Rega ultimaRega = (Rega) historicoDeCuidados.get(historicoDeCuidados.size()-1);
+                FrequenciaRega frequenciaRega = new FrequenciaRega();
+                frequenciaRega.eParaRegar(categoria, ultimaRega);   
+            }
         }
     }
 
@@ -78,8 +88,11 @@ public class Planta implements Serializable{
         System.out.println("Não possui registros de cuidados ainda. ");
         else{
             historicoDeCuidados.get(historicoDeCuidados.size()-1).listarCuidados();
-            FrequenciaRega frequenciaRega = new FrequenciaRega();
-            frequenciaRega.eParaRegar(categoria, historicoDeCuidados);
+            if (historicoDeCuidados.get(historicoDeCuidados.size()-1) instanceof Rega) {
+                Rega ultimaRega = (Rega) historicoDeCuidados.get(historicoDeCuidados.size()-1);
+                FrequenciaRega frequenciaRega = new FrequenciaRega();
+                frequenciaRega.eParaRegar(categoria, ultimaRega);   
+            }
         }
     }
 }
