@@ -21,12 +21,11 @@ public class Plantas implements Serializable{
 
     public Planta criarPlanta(Scanner inserir){
         Categorias categorias = new Categorias();
-        Interacao interacao = new Interacao();
         Planta planta = null;
-        int valor = interacao.interfaceCategoria(categorias, inserir);
+        int valor = Interacao.interfaceCategoria(categorias, inserir);
         Categoria categoria = categorias.preencherCategoria(valor);
         if(categoria!=null){
-            planta = interacao.lerPlanta(inserir);
+            planta = Interacao.lerPlanta(inserir);
             planta.setCategoria(categoria);
             System.out.println();
             System.out.println("Prontinho! Confira se os dados estão corretos:");

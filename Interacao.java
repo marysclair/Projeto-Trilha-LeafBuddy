@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Interacao {
 
-    public Planta lerPlanta(Scanner inserir){
+    static public Planta lerPlanta(Scanner inserir){
         System.out.println();
         System.out.println("------------------CADASTRE SUA PLANTA-------------------");
         System.out.println("Essa é a interface para cadastrar sua planta no sistema.");
@@ -22,7 +22,7 @@ public class Interacao {
         return planta;
     }
 
-    public Rega lerRega(Scanner inserir){
+    static public Rega lerRega(Scanner inserir){
         System.out.println();
         inserir.nextLine();
         System.out.println("-Informe a data da última rega (dd/MM/yyyy): ");
@@ -33,7 +33,7 @@ public class Interacao {
         return cuidado;
     }
 
-    public Adubacao lerAdubacao(Scanner inserir){
+    static public Adubacao lerAdubacao(Scanner inserir){
         System.out.println();
         inserir.nextLine();
         System.out.println("-Informe a data da última adubação (dd/MM/yyyy): ");
@@ -46,7 +46,7 @@ public class Interacao {
         return cuidado;
     }
 
-    public int interfaceCategoria(Categorias categorias, Scanner inserir){
+    static public int interfaceCategoria(Categorias categorias, Scanner inserir){
         System.out.println();
         System.out.println("------------------------------------------------------------");
         System.out.println("Você escolheu cadastrar uma nova planta no sistema.");
@@ -59,7 +59,7 @@ public class Interacao {
         return categoria;
     }
 
-    public int menu(Scanner inserir){
+    static public int menu(Scanner inserir){
         System.out.println("-------------------CATALOGO DE PLANTAS----------------------");
         System.out.println("[1]- Plantas cadastradas");
         System.out.println("[2]- Categorias");
@@ -71,7 +71,7 @@ public class Interacao {
         return opcao;
     }
 
-    public int interfacePlantasCadastradas(Scanner inserir){
+    static public int interfacePlantasCadastradas(Scanner inserir){
         System.out.println("[1]- Cadastrar novas plantas no sistema");
         System.out.println("[2]- Listar informações gerais");
         System.out.println("[3]- Remover uma planta");
@@ -81,7 +81,7 @@ public class Interacao {
         return opcao;
     }
 
-    public int interfaceCuidados(Scanner inserir){
+    static public int interfaceCuidados(Scanner inserir){
         System.out.println("[1]- Listar as informações de últimos cuidados de todas as plantas");
         System.out.println("[2]- Listar as informações de cuidados de todas as plantas");
         System.out.println("[3]- Acrescentar um novo registro de cuidados a uma planta");
@@ -90,7 +90,7 @@ public class Interacao {
         return opcao;
     }
 
-    public int interfaceFavoritas(Scanner inserir){
+    static public int interfaceFavoritas(Scanner inserir){
         System.out.println("[1]- Listar informações gerais");
         System.out.println("[2]- Listar as informações de últimos cuidados");
         System.out.println("[3]- Acrescentar uma nova planta");

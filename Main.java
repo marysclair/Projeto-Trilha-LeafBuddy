@@ -8,16 +8,15 @@ public class Main{
         Categorias categorias = new Categorias();
         Serializa serializar = new Serializa();
         Plantas plantas = serializar.lerPlantasDeArquivoBinario();
-        Interacao interacao = new Interacao();
         Scanner inserir = new Scanner(System.in);
             do{
-                opcao = interacao.menu(inserir);
+                opcao = Interacao.menu(inserir);
                 System.out.println();
                 if(opcao==1){
                     System.out.println();
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu a interface para gerenciar as plantas do sistema.");
-                    opcao = interacao.interfacePlantasCadastradas(inserir);
+                    opcao = Interacao.interfacePlantasCadastradas(inserir);
                     Busca buscar = new Busca();
                     System.out.println();
                     switch (opcao) {
@@ -42,7 +41,8 @@ public class Main{
                             System.out.println("Para isso, é necessário saber o ID da planta. ");
                             System.out.println("-Informe o ID: ");
                             id = inserir.nextInt();
-                            Planta resultadoBusca1 = buscar.buscarPorID(plantas, id);
+                            buscar.setCriterio(id);
+                            Planta resultadoBusca1 = buscar.buscarPorID(plantas);
                             System.out.println();
                             if(resultadoBusca1==null) System.out.println("----ID inválido----");
                             else {
@@ -60,7 +60,8 @@ public class Main{
                             System.out.println("Para buscar uma planta do sistema, é necessário saber o ID dela. ");
                             System.out.println("-Informe o ID: ");
                             id = inserir.nextInt();
-                            Planta resultadoBusca2 = buscar.buscarPorID(plantas, id);
+                            buscar.setCriterio(id);
+                            Planta resultadoBusca2 = buscar.buscarPorID(plantas);
                             System.out.println();
                             if(resultadoBusca2==null) System.out.println("----ID inválido----");
                             else {
@@ -107,8 +108,8 @@ public class Main{
                             inserir.nextLine();
                             nome = inserir.nextLine();
                             Busca buscar = new Busca();
-                            buscar.setCriterio(nome);
                             Plantas resultadoDaBusca = new Plantas();
+                            buscar.setCriterio(nome);
                             resultadoDaBusca = buscar.buscarPlantasPorCategoria(plantas); 
                             if(resultadoDaBusca.taVazia())      System.out.println("Categoria inválida/Nenhuma planta cadastrada nessa categoria");
                             else    resultadoDaBusca.listarInformacoesGerais();
@@ -123,7 +124,7 @@ public class Main{
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu histórico de cuidados.");
                     System.out.println();
-                    opcao = interacao.interfaceCuidados(inserir);
+                    opcao = Interacao.interfaceCuidados(inserir);
                     switch (opcao) {
                         case 1:
                             plantas.listarInformacoesCuidadosRecente();
@@ -138,7 +139,8 @@ public class Main{
                             System.out.println("Para isso, é necessário saber o ID da planta. ");
                             System.out.println("-Informe o ID: ");
                             id = inserir.nextInt();
-                            Planta resultadoBusca = buscar.buscarPorID(plantas, id);
+                            buscar.setCriterio(id);
+                            Planta resultadoBusca = buscar.buscarPorID(plantas);
                             System.out.println();
                             if(resultadoBusca==null) System.out.println("---ID inválido---");
                             else {
@@ -154,11 +156,11 @@ public class Main{
                                 System.out.println();
                                 switch (opcao) {
                                     case 1:
-                                        Rega cuidadoRega = interacao.lerRega(inserir); 
+                                        Rega cuidadoRega = Interacao.lerRega(inserir); 
                                         resultadoBusca.adicionarCuidado(cuidadoRega);
                                         break;
                                     case 2:
-                                        Adubacao cuidadoAdub = interacao.lerAdubacao(inserir); 
+                                        Adubacao cuidadoAdub = Interacao.lerAdubacao(inserir); 
                                         resultadoBusca.adicionarCuidado(cuidadoAdub);
                                         break;
                                     default:
@@ -184,7 +186,7 @@ public class Main{
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu lista personalizada de plantas.");
                     System.out.println();
-                    opcao = interacao.interfaceFavoritas(inserir);
+                    opcao = Interacao.interfaceFavoritas(inserir);
                     System.out.println();
                     switch(opcao){
                         case 1:
@@ -196,7 +198,8 @@ public class Main{
                             System.out.println("Para isso, é necessário saber o ID da planta. ");
                             System.out.println("-Informe o ID: ");
                             id = inserir.nextInt();
-                            Planta resultadoBusca1 = buscar.buscarPorID(plantas, id);
+                            buscar.setCriterio(id);
+                            Planta resultadoBusca1 = buscar.buscarPorID(plantas);
                             System.out.println();
                             if(resultadoBusca1==null) System.out.println("---ID inválido---");
                             else{
@@ -208,7 +211,8 @@ public class Main{
                             System.out.println("Para isso, é necessário saber o ID da planta. ");
                             System.out.println("-Informe o ID: ");
                             id = inserir.nextInt();
-                            Planta resultadoBusca2 = buscar.buscarPorID(plantas, id);
+                            buscar.setCriterio(id);
+                            Planta resultadoBusca2 = buscar.buscarPorID(plantas);
                             if(resultadoBusca2==null) System.out.println("---ID inválido---");
                             else{
                                 resultadoBusca2.setFavorita(false);

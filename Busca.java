@@ -11,6 +11,10 @@ public class Busca {
         this.criterio = criterio;
     }
     
+    public void setCriterio(int criterio) {
+        setCriterio(Integer.toString(criterio));
+    }
+    
     public Plantas buscarPlantasPorCategoria(Plantas plantas){
         Plantas resultadoDaBusca = new Plantas();
         for (Planta planta : plantas.getPlantas()) {
@@ -26,10 +30,10 @@ public class Busca {
 
     // }
 
-    public Planta buscarPorID(Plantas plantas, int id){
+    public Planta buscarPorID(Plantas plantas){
         Planta resultadoDaBusca = null;
         for (Planta planta : plantas.getPlantas()) {
-            if (planta.getId()==id) {
+            if (planta.getId()==Integer.parseInt(criterio)) {
                 resultadoDaBusca = planta;
             }
         }
