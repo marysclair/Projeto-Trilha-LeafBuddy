@@ -22,13 +22,13 @@ public class Suculenta extends Categoria implements PlantaComFlor{
     }
 
     public Suculenta() {
-        super(NomeCategorias.SUCULENTA.toString(), "Luz direta", "Arenoso e bem drenado", "Quente e seco");
+        super(NomeCategorias.SUCULENTA.toString(), "Luz direta", "Arenoso e bem drenado", "Quente e seco", "Um adubo específico para cactos e suculentas pode ser adequado para elas. É importante evitar adubos ricos em nitrogênio, pois isso pode estimular o crescimento excessivo e resultar em plantas menos compactas");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }
 
     public Suculenta(boolean temFlor) {
-        super(NomeCategorias.SUCULENTA.toString(), "Luz direta", "Arenoso e bem drenado", "Quente e seco");
+        super(NomeCategorias.SUCULENTA.toString(), "Luz direta", "Arenoso e bem drenado", "Quente e seco", "Um adubo específico para cactos e suculentas pode ser adequado para elas. É importante evitar adubos ricos em nitrogênio, pois isso pode estimular o crescimento excessivo e resultar em plantas menos compactas");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
         setTemFlor(temFlor);

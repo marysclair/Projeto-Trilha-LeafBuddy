@@ -20,13 +20,13 @@ public class Trepadeira extends Categoria implements PlantaComFlor{
     }
 
     public Trepadeira() {
-        super(NomeCategorias.TREPADEIRA.toString(), "Luz indireta e meia sombra", "Bem drenado e rico em matéria orgânica", "Luz indireta e meia sombra");
+        super(NomeCategorias.TREPADEIRA.toString(), "Luz indireta e meia sombra", "Bem drenado e rico em matéria orgânica", "Luz indireta e meia sombra", "Adubos com uma formulação equilibrada, como um fertilizante NPK (nitrogênio, fósforo e potássio) de uso geral, podem ser apropriados. Siga as instruções do fabricante para determinar a frequência e a dosagem adequadas");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }
 
     public Trepadeira(boolean temFlor) {
-        super(NomeCategorias.TREPADEIRA.toString(), "Luz indireta e meia sombra", "Bem drenado e rico em matéria orgânica", "Luz indireta e meia sombra");
+        super(NomeCategorias.TREPADEIRA.toString(), "Luz indireta e meia sombra", "Bem drenado e rico em matéria orgânica", "Luz indireta e meia sombra", "Adubos com uma formulação equilibrada, como um fertilizante NPK (nitrogênio, fósforo e potássio) de uso geral, podem ser apropriados. Siga as instruções do fabricante para determinar a frequência e a dosagem adequadas");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
         setTemFlor(temFlor);

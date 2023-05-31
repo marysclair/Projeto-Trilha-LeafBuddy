@@ -10,7 +10,7 @@ public class Bromelia extends Categoria{
     }
 
     public Bromelia() {
-        super(NomeCategorias.BROMELIA.toString(), "Luz indireta/sombra parcial", "Bem drenado e com boa retenção de umidade", "Quente e úmido");
+        super(NomeCategorias.BROMELIA.toString(), "Luz indireta/sombra parcial", "Bem drenado e com boa retenção de umidade", "Quente e úmido", "Adubos líquidos com formulação equilibrada, projetados para plantas epífitas ou bromélias, podem ser utilizados. Esses adubos costumam ter uma concentração mais baixa de nutrientes");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }

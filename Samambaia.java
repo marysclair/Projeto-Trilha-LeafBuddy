@@ -10,7 +10,7 @@ public class Samambaia extends Categoria {
     }
 
     public Samambaia() {
-        super(NomeCategorias.SAMAMBAIA.toString(), "Luz indireta", "Bem drenado", "Sombreado e úmido");
+        super(NomeCategorias.SAMAMBAIA.toString(), "Luz indireta", "Bem drenado", "Sombreado e úmido", "Adubos com uma formulação balanceada, como um fertilizante NPK geral, podem ser aplicados, seguindo as instruções de dosagem recomendadas para plantas de interior ou de sombra");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }

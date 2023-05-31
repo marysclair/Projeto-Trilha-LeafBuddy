@@ -21,13 +21,13 @@ public class Arbusto extends Categoria implements PlantaComFlor{
     }
 
     public Arbusto() {
-        super(NomeCategorias.ARBUSTO.toString(), "Luz indireta e sombra parcial/luz brilhante", "Bem drenado e rico em nutrientes", "Temperatura moderada e alta umidade");
+        super(NomeCategorias.ARBUSTO.toString(), "Luz indireta e sombra parcial/luz brilhante", "Bem drenado e rico em nutrientes", "Temperatura moderada e alta umidade", "Um adubo específico para cactos e suculentas, com uma formulação balanceada e baixa concentração de nitrogênio, pode ser usado. Adubos granulados de liberação lenta são uma opção comum");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }
 
     public Arbusto(boolean temFlor) {
-        super(NomeCategorias.ARBUSTO.toString(), "Luz indireta e sombra parcial/luz brilhante", "Bem drenado e rico em nutrientes", "Temperatura moderada e alta umidade");
+        super(NomeCategorias.ARBUSTO.toString(), "Luz indireta e sombra parcial/luz brilhante", "Bem drenado e rico em nutrientes", "Temperatura moderada e alta umidade", "Um adubo específico para cactos e suculentas, com uma formulação balanceada e baixa concentração de nitrogênio, pode ser usado. Adubos granulados de liberação lenta são uma opção comum");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
         setTemFlor(temFlor);

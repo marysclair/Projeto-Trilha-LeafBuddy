@@ -8,12 +8,15 @@ public abstract class Categoria implements Serializable{
     private String soloIdeal;
     private String climaIdeal;
     private int diasRega;
+    private String adubo;
 
-    public Categoria(String nome, String luminosidadeIdeal, String soloIdeal, String climaIdeal) {
+    
+    public Categoria(String nome, String luminosidadeIdeal, String soloIdeal, String climaIdeal, String adubo) {
         setNome(nome);
         setLuminosidadeIdeal(luminosidadeIdeal);
         setSoloIdeal(soloIdeal);
         setClimaIdeal(climaIdeal);
+        setAdubo(adubo);
     }
     
     public String getNome() {
@@ -51,12 +54,19 @@ public abstract class Categoria implements Serializable{
         this.diasRega = diasRega;
     }
 
+    public String getAdubo() {
+        return adubo;
+    }
+    public void setAdubo(String adubo) {
+        this.adubo = adubo;
+    }
     public void listarInformacoes(){
         System.out.println("-Nome: " + this.nome);
         System.out.println("-Solo ideal: " + this.soloIdeal);
         System.out.println("-Luminosidade ideal: " + this.luminosidadeIdeal);
         System.out.println("-Clima ideal: " + this.climaIdeal);
         System.out.println("-Frequência da rega: " + this.diasRega);
+        System.out.println("-Adubo indicado: " + this.adubo);
     }
     
     public abstract int calcularFrequenciaRega();

@@ -10,7 +10,7 @@ public class Flor extends Categoria {
     }
 
     public Flor() {
-        super(NomeCategorias.FLOR.toString(), "Luz indireta", "Bem drenado, rico em matéria orgânica e com boa retenção de umidade", "Temperatura moderada");
+        super(NomeCategorias.FLOR.toString(), "Luz indireta", "Bem drenado, rico em matéria orgânica e com boa retenção de umidade", "Temperatura moderada", "Adubos solúveis em água, formulados para flores, geralmente contêm nutrientes essenciais para promover a floração saudável");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }

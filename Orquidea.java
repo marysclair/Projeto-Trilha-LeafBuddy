@@ -10,7 +10,7 @@ public class Orquidea extends Categoria{
     }
 
     public Orquidea() {
-        super(NomeCategorias.ORQUIDEA.toString(), "Luz brilhante e difusa", "Misturas de substratos bem drenados e com boa ventilação para as raízes", "Quente e úmido");
+        super(NomeCategorias.ORQUIDEA.toString(), "Luz brilhante e difusa", "Misturas de substratos bem drenados e com boa ventilação para as raízes", "Quente e úmido", "Recomenda-se o uso de um adubo especializado para orquídeas, que seja solúvel em água e tenha uma formulação equilibrada. Adubos específicos para orquídeas estão disponíveis em diferentes formas, como líquidos, em pó ou bastões, e devem ser aplicados de acordo com as instruções do fabricante");
         int diasRega = calcularFrequenciaRega();
         setDiasRega(diasRega);
     }
