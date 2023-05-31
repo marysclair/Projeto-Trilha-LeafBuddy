@@ -20,10 +20,9 @@ public class Plantas implements Serializable{
     }
 
     public Planta criarPlanta(Scanner inserir){
-        Categorias categorias = new Categorias();
         Planta planta = null;
-        int valor = Interacao.interfaceCategoria(categorias, inserir);
-        Categoria categoria = categorias.preencherCategoria(valor);
+        int valor = Interacao.escolherCategoria(inserir);
+        Categoria categoria = Categorias.criarCategoria(valor, inserir);
         if(categoria!=null){
             planta = Interacao.lerPlanta(inserir);
             planta.setCategoria(categoria);

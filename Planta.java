@@ -1,20 +1,26 @@
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class Planta implements Serializable{
     private int id;
     private String nomePopular;
-    private int idade;
+    private LocalDate data;
     private Categoria categoria;
     private boolean favorita;
     private ArrayList<Cuidado> historicoDeCuidados = new ArrayList<>();
     
-    public Planta(int id, String nomePopular, int idade){
+    public Planta(int id, String nomePopular, String data){
         setId(id);
         setNomePopular(nomePopular);
-        setIdade(idade);
+        setData(data);
     }
-
+    
     public int getId() {
         return id;
     }
@@ -29,11 +35,20 @@ public class Planta implements Serializable{
         this.nomePopular = nomePopular;
     }
     
-    public int getIdade() {
-        return idade;
+    public LocalDate getData() {
+        return data;
     }
-    public void setIdade(int idade) {
-        this.idade = idade;
+    
+    public void setData(String data) {
+        if (!data.isEmpty()) {       
+            try{
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                LocalDate dataUltimaReDate = LocalDate.parse(data, formatter);
+                this.data = dataUltimaReDate;
+            } catch (DateTimeParseException e) {
+                System.out.println("Data inválida");
+            }
+        }
     }
     
     public Categoria getCategoria() {
@@ -49,21 +64,28 @@ public class Planta implements Serializable{
     public void setFavorita(boolean favorita) {
         this.favorita = favorita;
     }
-
+    
     public ArrayList<Cuidado> getHistoricoDeCuidados() {
         return historicoDeCuidados;
     }
     public void adicionarCuidado(Cuidado cuidado) {
         this.historicoDeCuidados.add(cuidado);
+        Collections.sort(this.historicoDeCuidados, Comparator.comparing(Cuidado::getData));
     }
     public void removerCuidado(Cuidado cuidado) {
         this.historicoDeCuidados.remove(cuidado);
     }
 
+    public int getIdade(){
+        Period periodo = Period.between(getData(), LocalDate.now());
+        int idadeMeses = periodo.getYears() * 12 + periodo.getMonths();
+        return idadeMeses;
+    }
+    
     public void mostrarInformacoes(){
         System.out.println("-ID: " + this.id);
         System.out.println("-Nome: " + this.nomePopular);
-        System.out.println("-Idade: " + this.idade);
+        System.out.println("-Idade: " + getIdade());
         System.out.println("-Categoria: " + this.categoria.getNome());
     }
 
@@ -77,8 +99,7 @@ public class Planta implements Serializable{
             }
             if (historicoDeCuidados.get(historicoDeCuidados.size()-1) instanceof Rega) {
                 Rega ultimaRega = (Rega) historicoDeCuidados.get(historicoDeCuidados.size()-1);
-                FrequenciaRega frequenciaRega = new FrequenciaRega();
-                frequenciaRega.eParaRegar(categoria, ultimaRega);   
+                FrequenciaRega.eParaRegar(categoria, ultimaRega);   
             }
         }
     }
@@ -90,8 +111,7 @@ public class Planta implements Serializable{
             historicoDeCuidados.get(historicoDeCuidados.size()-1).listarCuidados();
             if (historicoDeCuidados.get(historicoDeCuidados.size()-1) instanceof Rega) {
                 Rega ultimaRega = (Rega) historicoDeCuidados.get(historicoDeCuidados.size()-1);
-                FrequenciaRega frequenciaRega = new FrequenciaRega();
-                frequenciaRega.eParaRegar(categoria, ultimaRega);   
+                FrequenciaRega.eParaRegar(categoria, ultimaRega);   
             }
         }
     }

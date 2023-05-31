@@ -1,12 +1,20 @@
 import java.io.Serializable;
 // import java.util.ArrayList;
 
-public class Categoria implements Serializable{
+public abstract class Categoria implements Serializable{
     private String nome;
+    
     private String luminosidadeIdeal;
     private String soloIdeal;
     private String climaIdeal;
     private int diasRega;
+
+    public Categoria(String nome, String luminosidadeIdeal, String soloIdeal, String climaIdeal) {
+        setNome(nome);
+        setLuminosidadeIdeal(luminosidadeIdeal);
+        setSoloIdeal(soloIdeal);
+        setClimaIdeal(climaIdeal);
+    }
     
     public String getNome() {
         return nome;
@@ -43,16 +51,6 @@ public class Categoria implements Serializable{
         this.diasRega = diasRega;
     }
 
-    // public ArrayList<Planta> getPlantas() {
-    //     return plantas;
-    // }
-    // public void adicionarPlanta(Planta planta) {
-    //     this.plantas.add(planta);
-    // }
-    // public void removerPlanta(Planta planta){
-    //     this.plantas.remove(planta);
-    // }
-
     public void listarInformacoes(){
         System.out.println("-Nome: " + this.nome);
         System.out.println("-Solo ideal: " + this.soloIdeal);
@@ -60,5 +58,7 @@ public class Categoria implements Serializable{
         System.out.println("-Clima ideal: " + this.climaIdeal);
         System.out.println("-Frequência da rega: " + this.diasRega);
     }
+    
+    public abstract int calcularFrequenciaRega();
     
 }

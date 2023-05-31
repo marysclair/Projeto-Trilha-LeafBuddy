@@ -7,7 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Serializa {
-    public boolean criarArquivo(){
+    public static boolean criarArquivo(){
         File arquivo = new File("arquivo.bin");
         try{
             if(arquivo.createNewFile()){
@@ -22,7 +22,7 @@ public class Serializa {
         }
     }
 
-    public void salvarArquivoSerializado(Plantas planta){
+    public static void salvarArquivoSerializado(Plantas planta){
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
         try{
@@ -45,7 +45,7 @@ public class Serializa {
         }
     }
 
-    public Plantas lerPlantasDeArquivoBinario(){
+    public static Plantas lerPlantasDeArquivoBinario(){
         Plantas plantas = new Plantas();
         FileInputStream fis = null;
         ObjectInputStream ois = null;
