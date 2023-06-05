@@ -1,4 +1,3 @@
-import java.lang.reflect.Method;
 import java.util.Scanner;
 
 public class Categorias{
@@ -9,49 +8,50 @@ public class Categorias{
     }
 
     public static void imprimirCategorias(){
-        Class<Categoria> categoriaClass = Categoria.class;
-        Class<?>[] subclasses = categoriaClass.getDeclaredClasses();
-
-        for (Class<?> subclass : subclasses) {
-            try {
-                Method listarInformacoesMethod = subclass.getMethod("listarInformacoes");
-                listarInformacoesMethod.invoke(null);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        Categoria categoria = null;
+        for (int i = 1; i <= 9; i++) {
+            categoria = criarCategoria(i, 0, new Scanner(System.in));
+            System.out.println();
+            categoria.listarInformacoes();
             System.out.println();
         }
     }
 
-    public static Categoria criarCategoria(int valor, Scanner inserir){
+    public static Categoria criarCategoria(int valor, int opcao, Scanner inserir){
         Categoria categoria = null;
         switch (valor) {
             case 1:
                 categoria = new Cacto();
                 break;
             case 2:
-                if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
-                    categoria = new Suculenta(true);
-                else
-                    categoria = new Suculenta();
+                if(opcao==1){
+                    if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
+                        categoria = new Suculenta(true);
+                    else
+                        categoria = new Suculenta();
+                } else categoria = new Suculenta();
                 break;
             case 3:
                 categoria = new Samambaia();
                 break;
             case 4:
-                if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
-                    categoria = new Trepadeira(true);
-                else
-                    categoria = new Trepadeira();
+                if(opcao==1){
+                    if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
+                        categoria = new Trepadeira(true);
+                    else
+                        categoria = new Trepadeira();
+                } else categoria = new Trepadeira();
                 break;
             case 5:
                 categoria = new Folhagem();
                 break;
             case 6:
-                if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
-                    categoria = new Arbusto(true);
-                else
-                    categoria = new Arbusto();
+                if(opcao==1){
+                    if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
+                        categoria = new Arbusto(true);
+                    else
+                        categoria = new Arbusto();
+                } else categoria = new Arbusto();
                 break;
             case 7:
                 categoria = new Flor();

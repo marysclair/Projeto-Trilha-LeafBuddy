@@ -42,7 +42,9 @@ public class Trepadeira extends Categoria implements PlantaComFlor{
     @Override
     public void listarInformacoes() {
         super.listarInformacoes();
-        System.out.println("-Com flor");
-        getPeriodoFlorada();
+        if(temFlor){
+            System.out.println("-Com flor");
+            getPeriodoFlorada();
+        }
     }
 }

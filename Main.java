@@ -88,7 +88,7 @@ public class Main{
                             System.out.println("------------------------------------------------------------");
                             System.out.println("Para buscar informações de uma categoria específica, informe o código da categoria: ");
                             opcao = inserir.nextInt();
-                            Categoria categoria = Categorias.criarCategoria(opcao, inserir);
+                            Categoria categoria = Categorias.criarCategoria(opcao, 0, inserir);
                             categoria.listarInformacoes();
                             break;
                         case 4:
