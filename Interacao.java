@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -6,7 +7,7 @@ public class Interacao {
     public static Planta lerPlanta(Scanner inserir){
         System.out.println();
         System.out.println("------------------CADASTRE SUA PLANTA-------------------");
-        System.out.println("Essa é a interface para cadastrar sua planta no sistema.");
+        System.out.println("Essa é a pagina para cadastrar sua planta no sistema.");
         System.out.println("Preencha com atenção. Ok?");
         System.out.println();
         System.out.println("No campo de nome, recomendamos que coloque o nome popular da planta");
@@ -54,13 +55,20 @@ public class Interacao {
         System.out.println("-Esse sistema cataloga as plantas das seguintes categorias: ");
         Categorias.imprimirNomeCategorias();
         System.out.println("-Qual categoria de planta você gostaria de cadastrar? ");
-        System.out.println("-Informe a opção desejada: ");
-        int categoria = inserir.nextInt();
+        int categoria = -1;
+        try{
+            System.out.println("-Informe a opção desejada: ");
+            categoria = inserir.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Valor inválido. Digite um número inteiro");
+        }
         return categoria;
     }
 
     public static int menu(Scanner inserir){
         System.out.println("-------------------CATALOGO DE PLANTAS----------------------");
+        System.out.println();
+        System.out.println();
         System.out.println("[1]- Plantas cadastradas");
         System.out.println("[2]- Categorias");
         System.out.println("[3]- Histórico de cuidados");
@@ -71,36 +79,39 @@ public class Interacao {
         return opcao;
     }
 
-    public static int interfacePlantasCadastradas(Scanner inserir){
+    public static int paginaPlantasCadastradas(Scanner inserir){
         System.out.println("[1]- Cadastrar novas plantas no sistema");
         System.out.println("[2]- Listar informações gerais");
         System.out.println("[3]- Remover uma planta");
         System.out.println("[4]- Buscar uma planta");
+        System.out.println("[0]- Voltar");
         System.out.println("-Informe a opção desejada: ");
         int opcao = inserir.nextInt();
         return opcao;
     }
 
-    public static int interfaceCuidados(Scanner inserir){
+    public static int paginaCuidados(Scanner inserir){
         System.out.println("[1]- Listar as informações de últimos cuidados de todas as plantas");
         System.out.println("[2]- Listar as informações de cuidados de todas as plantas");
         System.out.println("[3]- Acrescentar um novo registro de cuidados a uma planta");
+        System.out.println("[0]- Voltar");
         System.out.println("-Informe a opção desejada: ");
         int opcao = inserir.nextInt();
         return opcao;
     }
 
-    public static int interfaceFavoritas(Scanner inserir){
+    public static int paginaFavoritas(Scanner inserir){
         System.out.println("[1]- Listar informações gerais");
         System.out.println("[2]- Listar as informações de últimos cuidados");
         System.out.println("[3]- Acrescentar uma nova planta");
         System.out.println("[4]- Remover uma planta");
+        System.out.println("[0]- Voltar");
         System.out.println("-Informe a opção desejada: ");
         int opcao = inserir.nextInt();
         return opcao;
     }
 
-    public static String interfacePlantaComFlor(Scanner inserir){
+    public static String paginaPlantaComFlor(Scanner inserir){
         System.out.println("A sua planta tem flor? [s/n]");
         String opcao = inserir.next();
         return opcao;
@@ -109,7 +120,7 @@ public class Interacao {
     public static Planta cadastrarCuidado(Scanner inserir, Planta resultadoBusca){
         System.out.println();
         System.out.println("------------------CADASTRE OS CUIDADOS-------------------");
-        System.out.println("Essa é a interface para cadastrar os cuidados da sua planta.");
+        System.out.println("Essa é a pagina para cadastrar os cuidados da sua planta.");
         System.out.println("Preencha com atenção. Ok?");
         System.out.println();
         System.out.println("[1]- Cadastrar dados sobre a rega");
@@ -133,14 +144,15 @@ public class Interacao {
         return resultadoBusca;
     }
 
-    public static int interfaceCategoria(Scanner inserir){
+    public static int paginaCategoria(Scanner inserir){
         System.out.println("------------------------------------------------------------");
-        System.out.println("Você escolheu a interface referente às categorias de plantas suportadas pelo sistema.");
+        System.out.println("Você escolheu a pagina referente às categorias de plantas suportadas pelo sistema.");
         System.out.println();
         System.out.println("[1]- Listar os nomes das categorias");
         System.out.println("[2]- Listar todas as categorias e suas informações");
         System.out.println("[3]- Buscar informação de uma categoria");
         System.out.println("[4]- Agrupar plantas por categoria");
+        System.out.println("[0]- Voltar");
         System.out.println("-Informe a opção desejada: ");
         int opcao = inserir.nextInt();
         return opcao;

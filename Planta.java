@@ -13,6 +13,7 @@ public class Planta implements Serializable{
     private LocalDate data;
     private Categoria categoria;
     private boolean favorita;
+    private boolean regada;
     private ArrayList<Cuidado> historicoDeCuidados = new ArrayList<>();
     
     public Planta(int id, String nomePopular, String data){
@@ -81,11 +82,19 @@ public class Planta implements Serializable{
         int idadeMeses = periodo.getYears() * 12 + periodo.getMonths();
         return idadeMeses;
     }
+
+    public boolean isRegada() {
+        return regada;
+    }
+
+    public void setRegada(boolean regada) {
+        this.regada = regada;
+    }
     
     public void mostrarInformacoes(){
         System.out.println("-ID: " + this.id);
         System.out.println("-Nome: " + this.nomePopular);
-        System.out.println("-Idade: " + getIdade());
+        System.out.println("-Idade: " + getIdade() + " meses");
         System.out.println("-Categoria: " + this.categoria.getNome());
     }
 
@@ -99,7 +108,7 @@ public class Planta implements Serializable{
             }
             if (historicoDeCuidados.get(historicoDeCuidados.size()-1) instanceof Rega) {
                 Rega ultimaRega = (Rega) historicoDeCuidados.get(historicoDeCuidados.size()-1);
-                FrequenciaRega.eParaRegar(categoria, ultimaRega);   
+                setRegada(FrequenciaRega.eParaRegar(categoria, ultimaRega)); 
             }
         }
     }
@@ -111,7 +120,7 @@ public class Planta implements Serializable{
             historicoDeCuidados.get(historicoDeCuidados.size()-1).listarCuidados();
             if (historicoDeCuidados.get(historicoDeCuidados.size()-1) instanceof Rega) {
                 Rega ultimaRega = (Rega) historicoDeCuidados.get(historicoDeCuidados.size()-1);
-                FrequenciaRega.eParaRegar(categoria, ultimaRega);   
+                setRegada(FrequenciaRega.eParaRegar(categoria, ultimaRega)); 
             }
         }
     }

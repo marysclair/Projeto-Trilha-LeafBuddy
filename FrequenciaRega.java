@@ -20,21 +20,25 @@ public class FrequenciaRega implements Serializable{
         return estacao;
     }
 
-    public static void eParaRegar(Categoria categoria, Rega cuidado){
+    public static boolean eParaRegar(Categoria categoria, Rega cuidado){
         int diasRega = categoria.getDiasRega();
+        boolean rega = false;
         LocalDate dataUltimaRega = cuidado.getData();
         LocalDate dataProximaRega = dataUltimaRega.plusDays(diasRega);
         long dias = ChronoUnit.DAYS.between(LocalDate.now(), dataProximaRega);
         System.out.println();
         if (dias>0) {
             System.out.println("Faltam " + dias  + " dia(s) para a próxima rega");
+            rega = false;
         }
         if(dataUltimaRega.plusDays(diasRega).isBefore(LocalDate.now())||dataUltimaRega.plusDays(diasRega).isEqual(LocalDate.now())){
             System.out.println("--É dia de regar sua planta!--");
             System.out.println();
+            rega = true;
         }
         System.out.println("Mas se lembre que para saber se é o dia certo para regar sua");
         System.out.println("planta, preste atenção na umidade do solo antes de tudo.");
+        return rega;
     }
 
 }

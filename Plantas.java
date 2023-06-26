@@ -76,10 +76,30 @@ public class Plantas implements Serializable{
             for (Planta planta : plantas) {
                 System.out.println("------------------------------------------------------------");
                 System.out.println("-Nome: " + planta.getNomePopular());
+                System.out.println();
                 planta.mostrarUltimoCuidado();
                 System.out.println("------------------------------------------------------------");
             }
             System.out.println();
+        }
+    }
+
+    public void listarInformacoesCuidadosRecentePlantasFavoritas(){
+        boolean vazia = false;
+        System.out.println();
+            for (Planta planta : plantas) {
+                if(planta.isFavorita()==true){
+                    vazia = true;
+                    System.out.println("------------------------------------------------------------");
+                    System.out.println("-Nome: " + planta.getNomePopular());
+                    System.out.println();
+                    planta.mostrarUltimoCuidado();
+                    System.out.println("------------------------------------------------------------");
+                }
+            }
+            System.out.println();
+        if(vazia==false){
+            System.out.println("Não existe plantas favoritas ainda no sistema.");
         }
     }
 
@@ -113,6 +133,32 @@ public class Plantas implements Serializable{
             System.out.println();
         if(vazia==false){
             System.out.println("Não existe plantas favoritas ainda no sistema.");
+        }
+    }
+
+    public void listarNomeEId(){
+        if(taVazia())
+            System.out.println("Não existe plantas cadastradas ainda no sistema.");
+        else{
+            System.out.println();
+            for (Planta planta : plantas) {
+                System.out.println("-Nome: " + planta.getNomePopular() + " - ID: " + planta.getId());
+            }
+            System.out.println();
+        }
+    }
+
+    public void getQtddPlantasParaRegar(){
+        if(!taVazia()){
+            int qtdd = 0;
+            for (Planta planta : plantas) {
+                if (planta.isRegada()) qtdd++;
+            }
+            if(qtdd>0){
+                System.out.println();
+                System.out.println("Você tem " + qtdd + " planta(s) para regar! - Acesse o histórico de cuidados");
+                System.out.println();
+            }
         }
     }
 }

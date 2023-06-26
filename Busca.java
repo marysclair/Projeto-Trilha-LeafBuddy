@@ -25,11 +25,6 @@ public class Busca {
         return resultadoDaBusca;
     }
 
-    // public Categoria buscarCategoria(String categoria){
-    //     Categorias categorias = new Categorias();
-
-    // }
-
     public Planta buscarPorID(Plantas plantas){
         Planta resultadoDaBusca = null;
         for (Planta planta : plantas.getPlantas()) {

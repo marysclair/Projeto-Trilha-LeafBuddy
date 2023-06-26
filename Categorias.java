@@ -25,7 +25,7 @@ public class Categorias{
                 break;
             case 2:
                 if(opcao==1){
-                    if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
+                    if(Interacao.paginaPlantaComFlor(inserir).equalsIgnoreCase("s"))
                         categoria = new Suculenta(true);
                     else
                         categoria = new Suculenta();
@@ -36,7 +36,7 @@ public class Categorias{
                 break;
             case 4:
                 if(opcao==1){
-                    if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
+                    if(Interacao.paginaPlantaComFlor(inserir).equalsIgnoreCase("s"))
                         categoria = new Trepadeira(true);
                     else
                         categoria = new Trepadeira();
@@ -47,7 +47,7 @@ public class Categorias{
                 break;
             case 6:
                 if(opcao==1){
-                    if(Interacao.interfacePlantaComFlor(inserir).equalsIgnoreCase("s"))
+                    if(Interacao.paginaPlantaComFlor(inserir).equalsIgnoreCase("s"))
                         categoria = new Arbusto(true);
                     else
                         categoria = new Arbusto();
