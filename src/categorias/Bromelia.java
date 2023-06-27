@@ -1,3 +1,5 @@
+package src.categorias;
+
 public class Bromelia extends Categoria{
     @Override
     public int calcularFrequenciaRega() {

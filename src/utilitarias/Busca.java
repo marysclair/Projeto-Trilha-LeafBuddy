@@ -1,4 +1,8 @@
+package src.utilitarias;
 // import java.util.ArrayList;
+
+import src.Planta;
+import src.Plantas;
 
 public class Busca {
     private String criterio;

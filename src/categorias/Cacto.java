@@ -1,3 +1,7 @@
+package src.categorias;
+
+import src.PlantaComFlor;
+
 public class Cacto extends Categoria implements PlantaComFlor{
     
     @Override

@@ -1,4 +1,11 @@
+package src;
 import java.util.Scanner;
+
+import src.categorias.Categoria;
+import src.categorias.Categorias;
+import src.utilitarias.Busca;
+import src.utilitarias.Interacao;
+import src.utilitarias.Serializa;
 
 public class Main{
     public static void main(String[] args){
@@ -28,6 +35,7 @@ public class Main{
                         case 1:
                             Planta planta = plantas.criarPlanta(inserir);
                             if(planta!=null){
+                                
                                 plantas.adicionarPlanta(planta);
                                 Serializa.salvarArquivoSerializado(plantas);
                                 System.out.println("Planta cadastrada com sucesso! :)");

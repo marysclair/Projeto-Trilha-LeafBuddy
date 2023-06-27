@@ -1,3 +1,4 @@
+package src;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,6 +7,11 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+
+import src.categorias.Categoria;
+import src.categorias.FrequenciaRega;
+import src.cuidados.Cuidado;
+import src.cuidados.Rega;
 
 public class Planta implements Serializable{
     private int id;

@@ -1,3 +1,7 @@
+package src.categorias;
+
+import src.PlantaComFlor;
+
 public class Arbusto extends Categoria implements PlantaComFlor{
     private boolean temFlor;
     

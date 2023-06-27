@@ -1,6 +1,12 @@
+package src.utilitarias;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+
+import src.Planta;
+import src.categorias.Categorias;
+import src.cuidados.Adubacao;
+import src.cuidados.Rega;
 
 public class Interacao {
 

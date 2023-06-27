@@ -1,6 +1,9 @@
+package src.categorias;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
+import src.cuidados.Rega;
 
 public class FrequenciaRega implements Serializable{
     public static String estacaoAtual(){

@@ -1,3 +1,4 @@
+package src.categorias;
 public enum NomeCategorias {
     CACTO(1), 
     SUCULENTA(2), 

@@ -1,3 +1,5 @@
+package src.cuidados;
+
 public class Adubacao extends Cuidado {
     private String adubo;
     

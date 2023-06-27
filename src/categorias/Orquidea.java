@@ -1,3 +1,5 @@
+package src.categorias;
+
 public class Orquidea extends Categoria{
     @Override
     public int calcularFrequenciaRega() {

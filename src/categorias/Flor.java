@@ -1,3 +1,5 @@
+package src.categorias;
+
 public class Flor extends Categoria {
     @Override
     public int calcularFrequenciaRega() {

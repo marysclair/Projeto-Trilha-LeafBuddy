@@ -1,3 +1,5 @@
+package src.cuidados;
+
 public class Rega extends Cuidado {
 
     public Rega(String data, String descricao){

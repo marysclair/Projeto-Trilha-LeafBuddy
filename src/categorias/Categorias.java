@@ -1,4 +1,7 @@
+package src.categorias;
 import java.util.Scanner;
+
+import src.utilitarias.Interacao;
 
 public class Categorias{
     public static void imprimirNomeCategorias(){

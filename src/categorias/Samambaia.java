@@ -1,3 +1,5 @@
+package src.categorias;
+
 public class Samambaia extends Categoria {
     @Override
     public int calcularFrequenciaRega() {
