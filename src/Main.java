@@ -6,17 +6,18 @@ import src.categorias.Categorias;
 import src.utilitarias.Busca;
 import src.utilitarias.Interacao;
 import src.utilitarias.Serializa;
+import java.io.IOException;
 
 public class Main{
-    public static void main(String[] args){
+    public static void main(String[] args) throws IOException, InterruptedException{
         System.setProperty("file.encoding", "UTF-8");
         int opcao, opcao2, id;
         String nome;
         Plantas plantas = Serializa.lerPlantasDeArquivoBinario();
         Scanner inserir = new Scanner(System.in);
             do{
-                System.out.print("\033[H\033[2J");
-                System.out.flush();
+                if (System.getProperty("os.name").contains("Windows"))  new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+                else    Runtime.getRuntime().exec("clear");
                 plantas.getQtddPlantasParaRegar();
                 System.out.println();
                 opcao = Interacao.menu(inserir);
@@ -27,74 +28,79 @@ public class Main{
                     System.out.println();
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu a pagina para gerenciar as plantas do sistema.");
-                    System.out.println();
-                    opcao2 = Interacao.paginaPlantasCadastradas(inserir);
-                    Busca buscar = new Busca();
-                    System.out.println();
-                    switch (opcao2) {
-                        case 1:
-                            Planta planta = plantas.criarPlanta(inserir);
-                            if(planta!=null){
-                                
-                                plantas.adicionarPlanta(planta);
-                                Serializa.salvarArquivoSerializado(plantas);
-                                System.out.println("Planta cadastrada com sucesso! :)");
-                            }
-                            break;
-                        case 2:
-                            System.out.println("------------------------------------------------------------");
-                            System.out.println("Você escolheu listar informações das plantas cadastradas.");
-                            System.out.println();
-                            plantas.listarInformacoesGerais();
-                            System.out.println();
-                            break;
-                        case 3:
-                            System.out.println("------------------------------------------------------------");
-                            System.out.println("Você escolheu remover uma planta do sistema.");
-                            System.out.println();
-                            System.out.println("Para remover uma planta do sistema, vamos ter que buscar a planta específica para isso.");
-                            id = Main.paginaBuscarId(inserir, plantas);
-                            buscar.setCriterio(id);
-                            Planta resultadoBusca1 = buscar.buscarPorID(plantas);
-                            System.out.println();
-                            if(resultadoBusca1==null) System.out.println("----ID inválido----");
-                            else {
-                                plantas.removerPlanta(resultadoBusca1);
-                                System.out.println("Planta removida com sucesso! :)");
-                                Serializa.salvarArquivoSerializado(plantas);
+                    do{
+                        System.out.println();
+                        opcao2 = Interacao.paginaPlantasCadastradas(inserir);
+                        Busca buscar = new Busca();
+                        System.out.println();
+                        switch (opcao2) {
+                            case 1:
+                                Planta planta = plantas.criarPlanta(inserir);
+                                if(planta!=null){
+                                    
+                                    plantas.adicionarPlanta(planta);
+                                    Serializa.salvarArquivoSerializado(plantas);
+                                    System.out.println("Planta cadastrada com sucesso! :)");
+                                }
+                                break;
+                            case 2:
+                                System.out.println("------------------------------------------------------------");
+                                System.out.println("Você escolheu listar informações das plantas cadastradas.");
                                 System.out.println();
-                                System.out.println("P.S.: Espero que ela não tenha morrido...");
-                            }
-                            break;
-                        case 4:
-                            System.out.println("------------------------------------------------------------");
-                            System.out.println("Você escolheu buscar uma planta do sistema.");
-                            System.out.println();
-                            id = Main.paginaBuscarId(inserir, plantas);
-                            buscar.setCriterio(id);
-                            Planta resultadoBusca2 = buscar.buscarPorID(plantas);
-                            System.out.println();
-                            if(resultadoBusca2==null) System.out.println("----ID inválido----");
-                            else {
+                                plantas.listarInformacoesGerais();
+                                System.out.println();
+                                break;
+                            case 3:
                                 System.out.println("------------------------------------------------------------");
-                                resultadoBusca2.mostrarInformacoes();
+                                System.out.println("Você escolheu remover uma planta do sistema.");
+                                System.out.println();
+                                System.out.println("Para remover uma planta do sistema, vamos ter que buscar a planta específica para isso.");
+                                id = Main.paginaBuscarId(inserir, plantas);
+                                buscar.setCriterio(id);
+                                Planta resultadoBusca1 = buscar.buscarPorID(plantas);
+                                System.out.println();
+                                if(resultadoBusca1==null) System.out.println("----ID inválido----");
+                                else {
+                                    plantas.removerPlanta(resultadoBusca1);
+                                    System.out.println("Planta removida com sucesso! :)");
+                                    Serializa.salvarArquivoSerializado(plantas);
+                                    System.out.println();
+                                    System.out.println("P.S.: Espero que ela não tenha morrido...");
+                                }
+                                break;
+                            case 4:
                                 System.out.println("------------------------------------------------------------");
+                                System.out.println("Você escolheu buscar uma planta do sistema.");
+                                System.out.println();
+                                id = Main.paginaBuscarId(inserir, plantas);
+                                buscar.setCriterio(id);
+                                Planta resultadoBusca2 = buscar.buscarPorID(plantas);
+                                System.out.println();
+                                if(resultadoBusca2==null) System.out.println("----ID inválido----");
+                                else {
+                                    System.out.println("------------------------------------------------------------");
+                                    resultadoBusca2.mostrarInformacoes();
+                                    System.out.println("------------------------------------------------------------");
+                                }
+                                break;
+                            case 0:
+                                System.out.println();
+                                break;
+                            default:
+                                System.out.println("Opção inválida");
+                                break;
                             }
-                            break;
-                        case 0:
-                            System.out.println();
-                            break;
-                        default:
-                            System.out.println("Opção inválida");
-                            break;
-                        }
+                    }while(opcao2!=0);
                     System.out.println();
                 }
                 else if(opcao==2){
-                    System.out.println();
-                    opcao2 = Interacao.paginaCategoria(inserir);
-                    System.out.println();
-                    switch (opcao2) {
+                    System.out.println("------------------------------------------------------------");
+                    System.out.println("Você escolheu a pagina referente às categorias de plantas suportadas pelo sistema.");
+                    do{
+                        System.out.println();
+                        opcao2 = Interacao.paginaCategoria(inserir);
+                        System.out.println();
+                        switch (opcao2) {
                         case 1:
                             System.out.println("------------------------------------------------------------");
                             Categorias.imprimirNomeCategorias();
@@ -137,14 +143,16 @@ public class Main{
                             System.out.println("Opção inválida");
                             break;
                     }
+                    }while(opcao2!=0);
                 }
                 else if(opcao==3){
                     System.out.println();
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu histórico de cuidados.");
-                    System.out.println();
-                    opcao2 = Interacao.paginaCuidados(inserir);
-                    switch (opcao2) {
+                    do{
+                        System.out.println();
+                        opcao2 = Interacao.paginaCuidados(inserir);
+                        switch (opcao2) {
                         case 1:
                             plantas.listarInformacoesCuidadosRecente();
                             break;
@@ -177,16 +185,18 @@ public class Main{
                             System.out.println("Opção inválida!");
                             break;
                         }
+                    }while(opcao2!=0);
                 }
                 else if(opcao==4){
                     Busca buscar = new Busca();
                     System.out.println();
                     System.out.println("------------------------------------------------------------");
                     System.out.println("Você escolheu lista personalizada de plantas.");
-                    System.out.println();
-                    opcao2 = Interacao.paginaFavoritas(inserir);
-                    System.out.println();
-                    switch(opcao2){
+                    do{
+                        System.out.println();
+                        opcao2 = Interacao.paginaFavoritas(inserir);
+                        System.out.println();
+                        switch(opcao2){
                         case 1:
                             plantas.listarPlantasFavoritas();
                             break;
@@ -231,6 +241,7 @@ public class Main{
                             System.out.println("Opção inválida!");
                             break;
                     }
+                    }while(opcao2!=0);
                 }
                 else if(opcao==0){
                     System.out.println();

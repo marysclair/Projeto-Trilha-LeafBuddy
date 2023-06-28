@@ -151,9 +151,6 @@ public class Interacao {
     }
 
     public static int paginaCategoria(Scanner inserir){
-        System.out.println("------------------------------------------------------------");
-        System.out.println("Você escolheu a pagina referente às categorias de plantas suportadas pelo sistema.");
-        System.out.println();
         System.out.println("[1]- Listar os nomes das categorias");
         System.out.println("[2]- Listar todas as categorias e suas informações");
         System.out.println("[3]- Buscar informação de uma categoria");
